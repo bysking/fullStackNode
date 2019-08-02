@@ -62,7 +62,7 @@ export default {
                 type: 'warning'
                 }).then(async () => {
                     // 删除操作
-                const res = await this.$http.delete(`/categories/${row._id}`)
+                const res = await this.$http.delete(`/rest/categories/${row._id}`)
                 this.$message({
                     type: 'success',
                     message: '删除成功!'
@@ -79,7 +79,8 @@ export default {
 
         },
         async fetch () {
-            const res = await this.$http.get('/categories')
+            const res = await this.$http.get('/rest/categories')
+            console.log(res.data)
             this.tableData = res.data
         }
     },

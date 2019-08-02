@@ -12,18 +12,19 @@ export default new Router({
         path: '/',
         name: 'Main',
         component: Main,
+        // main作为大组件，菜单，他的children作为子页面
         children:[
             {
+                // 组件可以复用，通过路由传递参数，在组件的create()里面根据参数判断初始化不同的数据就行了
                 path: '/categories/create',component: CategoryEdit
             },
             {
                 path: '/categories/list',component: CategoryList
             },
             {
+                // 配置路由带参数
                 path: '/categories/edit/:id',component: CategoryEdit,props: true
             }
-
-            
         ]
     }
   ]

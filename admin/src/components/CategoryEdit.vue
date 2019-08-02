@@ -46,21 +46,21 @@ export default {
   },
     methods: {
         async fetchAll () {
-            const res = await this.$http.get('/categories')
+            const res = await this.$http.get('/rest/categories')
             // console.log(res.data)
             this.options = res.data
         },
         async fetch(){
-           const res = await this.$http.get(`/categories/${this.id}`)
+           const res = await this.$http.get(`/rest/categories/${this.id}`)
            this.model = res.data
         },
         async save(){
             // console.log("save")
             let res;
             if(this.id){
-                this.$http.put(`/categories/${this.id}`,this.model)
+                this.$http.put(`/rest/categories/${this.id}`,this.model)
             }else{
-                this.$http.post('/categories',this.model)
+                this.$http.post('/rest/categories',this.model)
             }
             
             // this.$http.post('/categories',this.model).then(function(res){
