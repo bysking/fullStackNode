@@ -47,6 +47,13 @@ module.exports = app => {
         const model = await Category.findByIdAndUpdate(req.params.id,req.body)
         res.send(model)
     })
+    //  修改指定id的数据
+    router.delete('/categories/:id', async (req,res) => {
+        // 从数据库查询结果，限制查询条数10条
+        // console.log('进入/list')
+        const model = await Category.findByIdAndDelete(req.params.id)
+        res.send(model)
+    })
 // 子路由挂在admin/api下
     app.use('/admin/api',router)
 }

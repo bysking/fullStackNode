@@ -20,6 +20,12 @@
             </el-table-column>
             <el-table-column
                 align="center"
+                prop="parentname"
+                label="父级分类"
+                width="120">
+            </el-table-column>
+            <el-table-column
+                align="center"
                 label="操作"
                 width="150">
                 <template slot-scope="scope">
@@ -49,7 +55,31 @@ export default {
             console.log(row);
         },
         deleteIt(row) {
-            console.log(row);
+            // console.log(row);
+            this.$confirm('确认删除?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(async () => {
+                    // 删除操作
+                console.log('确认删除')
+                const res = await this.$http.delete(`/categories/${row._id}`)
+                console.log('删除返回结果')
+                console.log(res)
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+                this.fetch()
+                }).catch((err) => {
+                    console.log(err)
+                    // 取消删除操作
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
+
         },
         async fetch () {
             const res = await this.$http.get('/categories')

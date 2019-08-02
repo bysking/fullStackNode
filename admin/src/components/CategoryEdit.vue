@@ -3,9 +3,18 @@
         <h1>{{id?'编辑':'创建'}}分类</h1>
         <el-form @submit.native.prevent="save">
                             <!--  @submit.native.prevent="save" 阻止form表单默认提交刷新页面 -->
+            <el-form-item label="父级分类" name='parentname'>
+                <el-select v-model="value" placeholder="请选择">
+                    <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item label="名称" name='name'>
-                <el-input v-model="model.name">
-                    
+                <el-input v-model="model.name">                   
                 </el-input>
             </el-form-item>
             <el-form-item>
