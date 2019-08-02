@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <h1>创建分类</h1>
+        <h1>{{id?'编辑':'创建'}}分类</h1>
         <el-form @submit.native.prevent="save">
                             <!--  @submit.native.prevent="save" 阻止form表单默认提交刷新页面 -->
             <el-form-item label="名称" name='name'>
@@ -11,6 +11,7 @@
             <el-form-item>
                 <el-button type="primary" native-type="submit">保存</el-button>
             </el-form-item>
+
         </el-form>
     </div>
 </template>
@@ -18,6 +19,9 @@
 <script>
 export default {
   name: 'categoryedit',
+  props:{
+    id:{}
+  },
   data () {
     return {
         model: {},
@@ -25,12 +29,27 @@ export default {
         msg: 'Welcome to Your Vue.js App'
     }
   },
+  created(){
+      // 有id才执行后面的函数
+    this.id && this.fetch()
+  },
     methods: {
+        async fetch(){
+           const res = await this.$http.get(`/categories/${this.id}`)
+           this.model = res.data
+        },
         async save(){
-            console.log("save")
-            this.$http.post('/categories',this.model).then(function(res){
-                console.log(res)
-            })
+            // console.log("save")
+            let res;
+            if(this.id){
+                this.$http.put(`/categories/${this.id}`,this.model)
+            }else{
+                this.$http.post('/categories',this.model)
+            }
+            
+            // this.$http.post('/categories',this.model).then(function(res){
+            //     console.log(res)
+            // })
             
             console.log("跳转到分类列表")
             // 跳转到分类列表

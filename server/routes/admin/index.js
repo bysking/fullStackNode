@@ -24,6 +24,29 @@ module.exports = app => {
         // console.log(model)
        res.send('测试链接')
     })
+
+//  获取分类列表接口
+    router.get('/categories', async (req,res) => {
+        // 从数据库查询结果，限制查询条数10条
+        // console.log('进入/list')
+        const list = await Category.find().limit(10)
+        res.send(list)
+    })
+
+    //  获取指定id的详情的接口
+    router.get('/categories/:id', async (req,res) => {
+        // 从数据库查询结果，限制查询条数10条
+        // console.log('进入/list')
+        const model = await Category.findById(req.params.id)
+        res.send(model)
+    })
+    //  修改指定id的数据
+    router.put('/categories/:id', async (req,res) => {
+        // 从数据库查询结果，限制查询条数10条
+        // console.log('进入/list')
+        const model = await Category.findByIdAndUpdate(req.params.id,req.body)
+        res.send(model)
+    })
 // 子路由挂在admin/api下
     app.use('/admin/api',router)
 }
