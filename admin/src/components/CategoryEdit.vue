@@ -4,12 +4,12 @@
         <el-form @submit.native.prevent="save">
                             <!--  @submit.native.prevent="save" 阻止form表单默认提交刷新页面 -->
             <el-form-item label="父级分类" name='parentname'>
-                <el-select v-model="value" placeholder="请选择">
+                <el-select v-model="model.parentname" placeholder="请选择">
                     <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
+                        v-for="item in options"
+                        :key="item._id"
+                        :label="item.name"
+                        :value="item._id">
                     </el-option>
                 </el-select>
             </el-form-item>
@@ -35,14 +35,21 @@ export default {
     return {
         model: {},
         isCollapse: true,
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        options: []
     }
   },
   created(){
       // 有id才执行后面的函数
     this.id && this.fetch()
+    this.fetchAll()
   },
     methods: {
+        async fetchAll () {
+            const res = await this.$http.get('/categories')
+            // console.log(res.data)
+            this.options = res.data
+        },
         async fetch(){
            const res = await this.$http.get(`/categories/${this.id}`)
            this.model = res.data
@@ -60,7 +67,7 @@ export default {
             //     console.log(res)
             // })
             
-            console.log("跳转到分类列表")
+            // console.log("跳转到分类列表")
             // 跳转到分类列表
             this.$router.push('/categories/list')
             this.$message({

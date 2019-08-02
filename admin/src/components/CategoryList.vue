@@ -52,7 +52,7 @@ export default {
         },
         editIt(row) {
             this.$router.push(`/categories/edit/${row._id}`)
-            console.log(row);
+            // console.log(row);
         },
         deleteIt(row) {
             // console.log(row);
@@ -62,10 +62,7 @@ export default {
                 type: 'warning'
                 }).then(async () => {
                     // 删除操作
-                console.log('确认删除')
                 const res = await this.$http.delete(`/categories/${row._id}`)
-                console.log('删除返回结果')
-                console.log(res)
                 this.$message({
                     type: 'success',
                     message: '删除成功!'

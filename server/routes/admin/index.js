@@ -12,7 +12,7 @@ module.exports = app => {
     router.post('/categories', async (req,res) => {
         // 数据来源是req.body因为是请求，所以要等待，前边加await，函数定义为async，
         // 还需要在服务端主文件里面添加中间件 app.use(express.json())
-        console.log('后台处理请求categories')
+        // console.log('后台处理请求categories')
         const model = await Category.create(req.body)
        res.send(model)
     })

@@ -52,12 +52,12 @@ export default {
   },
     methods: {
         handleOpen(key, keyPath) {
-            console.log('打开')
-            console.log(key, keyPath);
+            // console.log('打开')
+            // console.log(key, keyPath);
         },
         handleClose(key, keyPath) {
-            console.log('关闭')
-            console.log(key, keyPath);
+            // console.log('关闭')
+            // console.log(key, keyPath);
         }
     }
 }
