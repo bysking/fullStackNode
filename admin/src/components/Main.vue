@@ -29,9 +29,8 @@
                 </template>
 
                 <el-menu-item-group>
-                    <template slot="title">分组二</template>
-                    <el-menu-item index="2-1">选项1</el-menu-item>
-                    <el-menu-item index="2-2">选项2</el-menu-item>
+                    <template slot="title">测试功能页面</template>
+                    <el-menu-item index="/categories/log">选项1</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>

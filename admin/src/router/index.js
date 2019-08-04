@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import CategoryEdit from '@/components/CategoryEdit'
 import CategoryList from '@/components/CategoryList'
+import Log from '@/components/Log'
 
 Vue.use(Router)
 
@@ -24,6 +25,10 @@ export default new Router({
             {
                 // 配置路由带参数
                 path: '/categories/edit/:id',component: CategoryEdit,props: true
+            },
+            {
+                // 配置路由带参数
+                path: '/categories/log',component: Log
             }
         ]
     }
