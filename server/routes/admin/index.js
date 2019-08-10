@@ -7,6 +7,7 @@ module.exports = app => {
 
     const express = require('express')
     // const router = express.Router() // express的子路由
+    const bcrypt = require('bcryptjs')
 
     const router = express.Router({
         mergeParams: true // 合并参数 app.use('/admin/api/rest/:resource',router)
@@ -91,5 +92,31 @@ module.exports = app => {
         file.url = `http://localhost:3000/uploads/${file.filename}`
         res.send(file)
 
+    })
+
+    app.post('/admin/api/login', async (req, res) => {
+        const { username, password } = req.body
+
+        // 根据用户名找用户
+        const Aduser = require('../../models/Aduser')
+        const user = await Aduser.findOne({username})
+
+        // 一般错误都是全局捕获
+        // 给所有响应添加拦截
+        // http.interceptors.response.use
+        if (!user) {
+            return res.status(422).send({
+                message: '用户不存在'
+            })
+        }
+        // 校验密码
+        console.log(user)
+        const RightUser = bcrypt.compareSync(password, user.password); // model里面密码select: false会报错
+        if(!RightUser){
+            return res.status(422).send({
+                message: '用户或者密码错误'
+            })
+        }
+        // 返回token
     })
 }

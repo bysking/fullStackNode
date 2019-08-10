@@ -8,11 +8,17 @@ import ItemList from '@/components/ItemList'
 import ADuserEdit from '@/components/ADuserEdit'
 import ADuserList from '@/components/ADuserList'
 import Log from '@/components/Log'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+        path: '/login',
+        name:'Login',
+        component: Login
+    },
     {
         path: '/',
         name: 'Main',
