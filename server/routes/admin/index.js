@@ -29,6 +29,23 @@ module.exports = app => {
     //    res.send('测试链接')
     })
 
+    // 抽离中间件
+    const authMidleWare = async (req, res, next) => {
+        // 前端用大写，后台用小写A,a
+        // const token = req.headers.authorization 
+        const token = String(req.headers.authorization || '' ).split(' ').pop() //去除'Bearer空格'
+        assert(token, 401, 'token不存在')
+        const tokenData = jwt.verify(token, app.get('secret'))
+        assert(tokenData, 401, 'tokenData')
+        // console.log(tokenData)
+        const { id } = tokenData // 解析出id，从数据库查询用户返回，万一传过来的用户是伪造的
+        assert(id, 401, '无效的token')
+        req.user = await Aduser.findById( id )
+        // console.log(req.user)
+        assert(req.user, 401, '请先登录')
+        await next()
+
+    }
     // 添加对象数据
     router.post('', async (req,res) => {
         // 数据来源是req.body因为是请求，所以要等待，前边加await，函数定义为async，
@@ -44,22 +61,7 @@ module.exports = app => {
 
     //  获取列表
     // 添加中间件校验token
-    router.get('', async (req, res, next) => {
-        // 前端用大写，后台用小写A,a
-        // const token = req.headers.authorization 
-        const token = String(req.headers.authorization || '' ).split(' ').pop() //去除'Bearer空格'
-        assert(token, 401, 'token不存在')
-        const tokenData = jwt.verify(token, app.get('secret'))
-        assert(tokenData, 401, 'tokenData')
-        // console.log(tokenData)
-        const { id } = tokenData // 解析出id，从数据库查询用户返回，万一传过来的用户是伪造的
-        assert(id, 401, '无效的token')
-        req.user = await Aduser.findById( id )
-        // console.log(req.user)
-        assert(req.user, 401, '请先登录')
-        await next()
-
-    }, async (req,res) => {
+    router.get('', authMidleWare, async (req,res) => {
         // 从数据库查询结果，限制查询条数10条
         // console.log('进入/list')
         const modelName = require('inflection').classify(req.params.resource)
