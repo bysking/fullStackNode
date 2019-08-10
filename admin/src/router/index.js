@@ -12,12 +12,13 @@ import Login from '@/components/Login'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
         path: '/login',
         name:'Login',
-        component: Login
+        component: Login,
+        meta: { isPublic: true }
     },
     {
         path: '/',
@@ -71,3 +72,13 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, form ,next) => {
+    // 解决某些界面原地刷新，不请求api，从而服务端不给错误状态码，客户端无法跳转到登录界面的问题
+    if (!to.meta.isPublic && !localStorage.token) {
+        console.log('ned')
+        next('/login')
+    }
+    next()
+})
+export default router
