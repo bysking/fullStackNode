@@ -15,6 +15,18 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 import http from './http'
 
+// 定义全局的变量，在上传文件的地方引用，携带token
+Vue.mixin({
+  methods: {
+
+    getAuthorization() { 
+      return { 
+        Authorization: `Bearer ${localStorage.token || ''}`
+      }
+    }
+  }
+})
+
 Vue.prototype.$http = http // 这样可以在别的地方用this.$http来使用api接口
 /* eslint-disable no-new */
 new Vue({

@@ -10,6 +10,7 @@
                     <el-upload
                         class="avatar-uploader"
                         :action="$http.defaults.baseURL + '/upload'"
+                        :headers="getAuthorization()"
                         :show-file-list="false"
                         :on-success="handleAvatarSuccess">
                         <!-- 图片上传成功后会返回一个服务器图片地址 -->
