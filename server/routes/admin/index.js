@@ -10,6 +10,7 @@ module.exports = app => {
     const bcrypt = require('bcryptjs')
     const jwt = require('jsonwebtoken')
     const Aduser = require('../../models/Aduser')
+    const assert = require('http-assert')
 
     const router = express.Router({
         mergeParams: true // 合并参数 app.use('/admin/api/rest/:resource',router)
@@ -118,19 +119,21 @@ module.exports = app => {
         // 一般错误都是全局捕获
         // 给所有响应添加拦截
         // http.interceptors.response.use
-        if (!user) {
-            return res.status(422).send({
-                message: '用户不存在'
-            })
-        }
+        // if (!user) {
+        //     return res.status(422).send({
+        //         message: '用户不存在'
+        //     })
+        // }
+        assert(user, 422, '用户不存在')
         // 校验密码
-        console.log(user)
+        // console.log(user)
         const RightUser = bcrypt.compareSync(password, user.password); // model里面密码select: false会报错
-        if(!RightUser){
-            return res.status(422).send({
-                message: '用户或者密码错误'
-            })
-        }
+        // if(!RightUser){
+        //     return res.status(422).send({
+        //         message: '用户或者密码错误'
+        //     })
+        // }
+        assert(RightUser, 422, '用户名或密码错误')
         // 返回token npm i jsonwebtoken
         const jwt = require('jsonwebtoken')
         const token = jwt.sign({
@@ -139,5 +142,12 @@ module.exports = app => {
             username: user.username
         }, app.get('secret'))
         res.send({token, username:user.username})
+    })
+
+    // 错误处理函数捕获,由assert抛出
+    app.use(async (err, req, res, nest) => {
+        res.status(err.statusCode).send({
+            massage: err.message
+        })
     })
 }
