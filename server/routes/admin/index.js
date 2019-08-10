@@ -117,6 +117,13 @@ module.exports = app => {
                 message: '用户或者密码错误'
             })
         }
-        // 返回token
+        // 返回token npm i jsonwebtoken
+        const jwt = require('jsonwebtoken')
+        const token = jwt.sign({
+            id: user._id,
+            _id: user._id,
+            username: user.username
+        }, app.get('secret'))
+        res.send({token, username:user.username})
     })
 }

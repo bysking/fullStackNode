@@ -32,7 +32,7 @@
         methods: {
             async handlelogin() {
                 const res = await this.$http.post('login', this.model)
-                console.log(res.data)
+                // console.log(res.data)
 
             }
         },

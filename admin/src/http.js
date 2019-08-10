@@ -7,7 +7,6 @@ const http = axios.create({
 
 // 给所有响应添加拦截
 http.interceptors.response.use( res => {
-
     return res
 }, err => {
     // 任何不是状态码200的错误

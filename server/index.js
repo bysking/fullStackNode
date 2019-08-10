@@ -1,5 +1,7 @@
 const express = require('express')
 const app = express()
+// app实例上面设置一个变量，用例token校验密钥
+app.set('secret', 'bysking')
 const cors = require('cors')
 
 const bodyParser = require('body-parser');
