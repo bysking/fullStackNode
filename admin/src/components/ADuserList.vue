@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <h1>分类列表</h1>
+        <h1>管理员列表</h1>
         <div class="table">
             <el-table
             :data="tableData"
@@ -22,12 +22,12 @@
                     label="用户名"
                     width="120">
                 </el-table-column>
-                <el-table-column
+                <!-- <el-table-column
                     align="center"
                     prop="password"
                     label="密码"
-                    width="120">
-                </el-table-column>
+                    width="220">
+                </el-table-column> -->
                 <el-table-column
                     align="center"
                     label="操作"
