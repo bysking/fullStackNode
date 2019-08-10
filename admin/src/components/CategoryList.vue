@@ -114,9 +114,8 @@ export default {
             this.allData = res.data
             this.myPage.total = this.allData.length
              for(let i = 0; i < this.myPage.pageSize; i++){
-                this.tableData.push(this.allData[i])
+                if(this.allData[i]) this.tableData.push(this.allData[i])
             }
-
         }
         , handleSizeChange(val) {
             console.log(`每页 ${val} 条`);
