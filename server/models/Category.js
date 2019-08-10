@@ -4,7 +4,8 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
     name: {type: String},
     // parentname: {type: String}
-    parentname: {type: mongoose.SchemaTypes.ObjectId, ref: 'Catgory'} // 父级分类是一个数据模型对象
+    // 让父级关联到指向自己的值
+    parent: {type: mongoose.SchemaTypes.ObjectId, ref: 'Catgory'}, // 父级分类是一个数据模型对象
 })
 // 导出表，哪里需要哪里引用
 module.exports = mongoose.model('Catgory', schema)

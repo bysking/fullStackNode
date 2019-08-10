@@ -24,7 +24,7 @@
                 </el-table-column>
                 <el-table-column
                     align="center"
-                    prop="parentname"
+                    prop="parent.name"
                     label="父级分类"
                     width="120">
                 </el-table-column>

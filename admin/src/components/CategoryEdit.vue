@@ -4,7 +4,7 @@
         <el-form @submit.native.prevent="save">
                             <!--  @submit.native.prevent="save" 阻止form表单默认提交刷新页面 -->
             <el-form-item label="父级分类" name='parentname'>
-                <el-select v-model="model.parentname" placeholder="请选择">
+                <el-select v-model="model.parent" placeholder="请选择">
                     <el-option
                         v-for="item in options"
                         :key="item._id"

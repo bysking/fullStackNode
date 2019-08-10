@@ -43,7 +43,8 @@ module.exports = app => {
         const modelName = require('inflection').classify(req.params.resource)
         const model = require(`../../models/${modelName}`)
         // const list = await model.find().limit(10)
-        const list = await model.find()
+        const list = await model.find().populate('parent') // 把parent的完整信息查询出来，不仅仅要她的id
+        console.log('查询分类')
         res.send(list)
     })
 
