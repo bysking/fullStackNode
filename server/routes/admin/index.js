@@ -8,6 +8,8 @@ module.exports = app => {
     const express = require('express')
     // const router = express.Router() // express的子路由
     const bcrypt = require('bcryptjs')
+    const jwt = require('jsonwebtoken')
+    const Aduser = require('../../models/Aduser')
 
     const router = express.Router({
         mergeParams: true // 合并参数 app.use('/admin/api/rest/:resource',router)
@@ -40,7 +42,19 @@ module.exports = app => {
     })
 
     //  获取列表
-    router.get('', async (req,res) => {
+    // 添加中间件校验token
+    router.get('', async (req, res, next) => {
+        // 前端用大写，后台用小写A,a
+        // const token = req.headers.authorization 
+        const token = String(req.headers.authorization || '' ).split(' ').pop() //去除'Bearer空格'
+        const tokenData = jwt.verify(token, app.get('secret'))
+        // console.log(tokenData)
+        const { id } = tokenData // 解析出id，从数据库查询用户返回，万一传过来的用户是伪造的
+        req.user = await Aduser.findById( id )
+        // console.log(req.user)
+        await next()
+
+    }, async (req,res) => {
         // 从数据库查询结果，限制查询条数10条
         // console.log('进入/list')
         const modelName = require('inflection').classify(req.params.resource)

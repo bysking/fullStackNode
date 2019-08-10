@@ -32,6 +32,7 @@
         methods: {
             async handlelogin() {
                 const res = await this.$http.post('login', this.model)
+                console.log(res)
                 localStorage.token = res.data.token // 本地缓存token，浏览器存储，如果是sessionStorage浏览器关闭就没有了
                 this.$router.push('/')
                 this.$message({
