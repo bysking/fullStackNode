@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     // npm i bcryptjs 进行加密存储,作密码散列
     password: {
         type: String,
-        select: true, // 默认不让密码查出来
+        select: false, // 默认不让密码查出来
         set(val) {
             // hashSync同步方法，10-12加密级别，越高越安全也耗时
             let salt = bcrypt.genSaltSync(10);

@@ -118,7 +118,7 @@ module.exports = app => {
 
         // 根据用户名找用户
         const Aduser = require('../../models/Aduser')
-        const user = await Aduser.findOne({username})
+        const user = await Aduser.findOne({username}).select('+password')
 
         // 一般错误都是全局捕获
         // 给所有响应添加拦截
