@@ -5,6 +5,8 @@ import CategoryEdit from '@/components/CategoryEdit'
 import CategoryList from '@/components/CategoryList'
 import ItemEdit from '@/components/ItemEdit'
 import ItemList from '@/components/ItemList'
+import ADuserEdit from '@/components/ADuserEdit'
+import ADuserList from '@/components/ADuserList'
 import Log from '@/components/Log'
 
 Vue.use(Router)
@@ -28,6 +30,7 @@ export default new Router({
                 // 配置路由带参数
                 path: '/categories/edit/:id',component: CategoryEdit,props: true
             },
+
             //物品路由
             {
                 // 组件可以复用，通过路由传递参数，在组件的create()里面根据参数判断初始化不同的数据就行了
@@ -40,6 +43,20 @@ export default new Router({
                 // 配置路由带参数
                 path: '/items/edit/:id',component: ItemEdit,props: true
             },
+
+             //管理员路由
+             {
+                // 组件可以复用，通过路由传递参数，在组件的create()里面根据参数判断初始化不同的数据就行了
+                path: '/adusers/create',component: ADuserEdit
+            },
+            {
+                path: '/adusers/list',component: ADuserList
+            },
+            {
+                // 配置路由带参数
+                path: '/adusers/edit/:id',component: ADuserEdit,props: true
+            },
+
             {
                 // 配置路由带参数
                 path: '/categories/log',component: Log

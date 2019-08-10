@@ -31,6 +31,7 @@ module.exports = app => {
         // 还需要在服务端主文件里面添加中间件 app.use(express.json())
         // console.log('post后台处理请求categories')
         const modelName = require('inflection').classify(req.params.resource)
+        console.log(modelName)
         const model = require(`../../models/${modelName}`)
         const item = await model.create(req.body)
         res.send(item)

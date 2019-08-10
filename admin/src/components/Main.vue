@@ -32,12 +32,25 @@
                     <el-menu-item index="/Items/create">新建物品</el-menu-item>
                     <el-menu-item index="/Items/list">物品列表</el-menu-item>
                 </el-menu-item-group>
+            </el-submenu>
+             <el-submenu index="3">
+
+                <template slot="title">
+                    <i class="el-icon-location"></i>
+                    <span>系统设置</span>
+                </template>
+                <el-menu-item-group>
+                    <template slot="title">管理员</template>
+                    <el-menu-item index="/adusers/create">新建管理员</el-menu-item>
+                    <el-menu-item index="adusers/list">管理员列表</el-menu-item>
+                </el-menu-item-group>
                 <el-menu-item-group>
                     <template slot="title">测试功能页面</template>
                     <el-menu-item index="/categories/log">选项1</el-menu-item>
                 </el-menu-item-group>
             </el-submenu>
         </el-menu>
+
         <el-main>
             <router-view></router-view>
         </el-main>
