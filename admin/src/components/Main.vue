@@ -42,7 +42,7 @@
                 <el-menu-item-group>
                     <template slot="title">管理员</template>
                     <el-menu-item index="/adusers/create">新建管理员</el-menu-item>
-                    <el-menu-item index="adusers/list">管理员列表</el-menu-item>
+                    <el-menu-item index="/adusers/list">管理员列表</el-menu-item>
                 </el-menu-item-group>
                 <el-menu-item-group>
                     <template slot="title">测试功能页面</template>
