@@ -9,7 +9,9 @@ const http = axios.create({
 // 给所有请求添加拦截
 http.interceptors.request.use( (config) => {
     // 设置请求头，‘Bearer空格’ 是一个行业规范，区分不同的token
-    config.headers.Authorization = 'Bearer ' + localStorage.token
+    if(localStorage.token){
+        config.headers.Authorization = 'Bearer ' + localStorage.token
+    }
     return config
 }, err => {
     // 任何不是状态码200的错误
