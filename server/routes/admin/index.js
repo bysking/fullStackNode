@@ -79,4 +79,15 @@ module.exports = app => {
     })
 
     app.use('/admin/api/rest/:resource',router)
+
+    // 处理文件上传，图片上传 需要
+    // npm i multer插件
+    const multer = require('multer') // 引入文件上传模块
+    const upload = multer({dest: __dirname + '../../../uploads'}) // 配置文件上传路径：__dirname：绝对地址
+    app.post('/admin/api/upload',upload.single('file'), async (req, res) => {
+        const file = req.file // 为了让文件可以被访问，需要定义路由把uploads公开
+        file.url = `http://localhost:3000/uploads/${file.filename}`
+        res.send(file)
+
+    })
 }

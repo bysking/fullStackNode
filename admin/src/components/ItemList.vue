@@ -27,6 +27,9 @@
                     prop="avater"
                     label="图标"
                     width="120">
+                    <template slot-scope="scope">
+                        <img :src="scope.row.avater" alt="tubiao" style="height: 3em">
+                    </template>
                 </el-table-column>
                 <el-table-column
                     align="center"
