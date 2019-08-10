@@ -58,9 +58,9 @@ export default {
             // console.log("save")
             let res;
             if(this.id){
-                this.$http.put(`/rest/categories/${this.id}`,this.model)
+                res = this.$http.put(`/rest/categories/${this.id}`,this.model)
             }else{
-                this.$http.post('/rest/categories',this.model)
+                res = this.$http.post('/rest/categories',this.model)
             }
             
             // this.$http.post('/categories',this.model).then(function(res){
@@ -69,6 +69,7 @@ export default {
             
             // console.log("跳转到分类列表")
             // 跳转到分类列表
+            console.log(res)
             this.$router.push('/categories/list')
             this.$message({
                 type: 'success',
