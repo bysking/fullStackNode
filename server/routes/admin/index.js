@@ -29,7 +29,7 @@ module.exports = app => {
     router.post('', async (req,res) => {
         // 数据来源是req.body因为是请求，所以要等待，前边加await，函数定义为async，
         // 还需要在服务端主文件里面添加中间件 app.use(express.json())
-        console.log('post后台处理请求categories')
+        // console.log('post后台处理请求categories')
         const modelName = require('inflection').classify(req.params.resource)
         const model = require(`../../models/${modelName}`)
         const item = await model.create(req.body)
@@ -44,7 +44,7 @@ module.exports = app => {
         const model = require(`../../models/${modelName}`)
         // const list = await model.find().limit(10)
         const list = await model.find().populate('parent') // 把parent的完整信息查询出来，不仅仅要她的id
-        console.log('查询分类')
+        // console.log('查询分类')
         res.send(list)
     })
 

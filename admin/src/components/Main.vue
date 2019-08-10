@@ -27,7 +27,11 @@
                     <i class="el-icon-location"></i>
                     <span>导航二</span>
                 </template>
-
+                <el-menu-item-group>
+                    <template slot="title">物品</template>
+                    <el-menu-item index="/Items/create">新建物品</el-menu-item>
+                    <el-menu-item index="/Items/list">物品列表</el-menu-item>
+                </el-menu-item-group>
                 <el-menu-item-group>
                     <template slot="title">测试功能页面</template>
                     <el-menu-item index="/categories/log">选项1</el-menu-item>
