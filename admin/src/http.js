@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
+import router from './router'
 
 const http = axios.create({
     baseURL: 'http://localhost:3000/admin/api'
@@ -26,13 +27,17 @@ http.interceptors.response.use( res => {
 }, err => {
     // 任何不是状态码200的错误
     console.log('进入响应捕获错误')
-    console.log(err)
+    console.log(err.response)
     // 全局处理状态码不是200的错误，弹窗提醒
     if(err.response.data.message){
+        console.log('全局处理状态码不是200的错误，弹窗提醒')
         Vue.prototype.$message.error({
             type: err,
             message: err.response.data.message
         })
+    }
+    if(err.response.status === 401) { // 约定401统一跳转登录页面
+        router.push('/login')
     }
     return Promise.reject(err)
 })

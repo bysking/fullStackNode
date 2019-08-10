@@ -152,7 +152,7 @@ module.exports = app => {
     app.use(async (err, req, res, nest) => {
         console.log(err)
         res.status(err.statusCode || 500).send({
-            massage: err.message
+            message: err.message
         })
         // await next()
     })
