@@ -24,6 +24,7 @@ const router = new Router({
         path: '/',
         name: 'Main',
         component: Main,
+        meta: { isPublic: true },
         // main作为大组件，菜单，他的children作为子页面
         children:[
             {
@@ -75,10 +76,10 @@ const router = new Router({
 
 router.beforeEach((to, form ,next) => {
     // 解决某些界面原地刷新，不请求api，从而服务端不给错误状态码，客户端无法跳转到登录界面的问题
-    if (!to.meta.isPublic && !localStorage.token) {
-        console.log('ned')
-        next('/login')
-    }
+    // if (!to.meta.isPublic && !localStorage.token) {
+    //     console.log('ned')
+    //     next('/login')
+    // }
     next()
 })
 export default router
